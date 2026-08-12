@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tarot Spread Builder</title>
+  <link rel="icon" type="image/png" href="images/CardBacks.png" />
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#14101c" />
+  <link rel="apple-touch-icon" href="images/CardBacks.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <main class="page page-wide">
+    <h1>Tarot Spread Builder</h1>
+
+    <div class="options">
+      <label class="option">
+        <input type="checkbox" id="reversed-toggle" checked />
+        Allow reversed cards
+      </label>
+    </div>
+
+    <div class="spread-row">
+      <label class="spread-select-label" for="spread-select">Spread</label>
+      <select id="spread-select"></select>
+    </div>
+
+    <div class="board-actions">
+      <button type="button" id="randomize-btn">Randomize</button>
+      <button type="button" id="clear-btn">Clear All</button>
+    </div>
+
+    <div class="spread-board" id="spread-board"></div>
+
+    <p class="sr-only" id="status-region" role="status" aria-live="polite"></p>
+  </main>
+
+  <div class="lightbox picker-modal" id="picker-modal" hidden>
+    <div class="picker-panel" role="dialog" aria-modal="true" aria-labelledby="picker-title">
+      <button class="lightbox-close" id="picker-close" aria-label="Close">&times;</button>
+      <h2 id="picker-title">Choose a card</h2>
+      <div id="picker-grid"></div>
+    </div>
+  </div>
+
+  <script src="cards.js"></script>
+  <script src="spreads.js"></script>
+  <script src="app.js"></script>
+  <script src="register-sw.js"></script>
+</body>
+
+</html>
