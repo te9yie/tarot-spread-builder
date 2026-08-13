@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="100%" height="100%">
+  <!-- 背景 -->
+  <rect width="64" height="64" rx="14" fill="#134E4A"/>
+  
+  <!-- スプレッド（3枚のカード配置） -->
+  <rect x="10" y="20" width="12" height="18" rx="1.5" fill="none" stroke="#4ADE80" stroke-width="2"/>
+  <rect x="26" y="16" width="12" height="18" rx="1.5" fill="none" stroke="#4ADE80" stroke-width="2"/>
+  <rect x="42" y="20" width="12" height="18" rx="1.5" fill="none" stroke="#4ADE80" stroke-width="2"/>
+  
+  <!-- 接続ガイド線 -->
+  <line x1="22" y1="29" x2="26" y2="25" stroke="#4ADE80" stroke-width="1.5" stroke-dasharray="2,2" opacity="0.7"/>
+  <line x1="38" y1="25" x2="42" y2="29" stroke="#4ADE80" stroke-width="1.5" stroke-dasharray="2,2" opacity="0.7"/>
+  
+  <!-- プラス（構築・追加）アイコン -->
+  <circle cx="32" cy="46" r="7" fill="#4ADE80"/>
+  <path d="M 32 42 L 32 50 M 28 46 L 36 46" stroke="#134E4A" stroke-width="2" stroke-linecap="round"/>
+</svg>
