@@ -112,6 +112,36 @@ button:focus-visible {
   outline-offset: 2px;
 }
 
+.mode-switch {
+  display: inline-flex;
+  gap: 0.25rem;
+  padding: 0.25rem;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+}
+
+.mode-btn {
+  font-family: inherit;
+  font-size: 0.95rem;
+  background: none;
+  color: var(--fg);
+  border: none;
+  border-radius: 8px;
+  padding: 0.45rem 1.1rem;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.mode-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+}
+
+.mode-btn[aria-pressed="true"] {
+  background: var(--accent);
+  opacity: 1;
+}
+
 .board-actions {
   display: flex;
   gap: 0.75rem;
@@ -241,6 +271,16 @@ button:focus-visible {
   right: -0.5rem;
 }
 
+/* Preview mode */
+
+body.mode-preview .edit-only {
+  display: none;
+}
+
+body.mode-preview .slot-face {
+  cursor: zoom-in;
+}
+
 /* Card picker grid (reused across list-style pages and the picker modal) */
 
 .card-grid {
@@ -348,4 +388,16 @@ button:focus-visible {
 .lightbox-close:hover,
 .lightbox-close:focus-visible {
   background: var(--accent);
+}
+
+.viewer-image {
+  max-width: min(100%, 420px);
+  max-height: 85vh;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
+}
+
+.viewer-image.reversed {
+  transform: rotate(180deg);
 }

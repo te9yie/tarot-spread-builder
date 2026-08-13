@@ -1,4 +1,4 @@
-const CACHE_NAME = "tarot-spread-builder-v1";
+const CACHE_NAME = "tarot-spread-builder-v2";
 
 const APP_SHELL = [
   "./",

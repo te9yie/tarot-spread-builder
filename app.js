@@ -7,9 +7,14 @@ const pickerModal = document.getElementById("picker-modal");
 const pickerGrid = document.getElementById("picker-grid");
 const pickerClose = document.getElementById("picker-close");
 const statusRegion = document.getElementById("status-region");
+const modeSwitch = document.querySelector(".mode-switch");
+const cardViewer = document.getElementById("card-viewer");
+const viewerImage = document.getElementById("viewer-image");
+const viewerClose = document.getElementById("viewer-close");
 
 const state = {
   spreadId: SPREADS[0].id,
+  mode: "edit", // "edit" | "preview"
   allowReversed: true,
   assignments: {}, // positionId -> { file, reversed }
   activePositionId: null,
@@ -116,6 +121,8 @@ function renderSlot(positionId) {
   const clearButton = slot.querySelector('[data-action="clear"]');
   const reverseButton = slot.querySelector('[data-action="reverse"]');
 
+  const editable = state.mode === "edit";
+
   if (assignment) {
     const label = cardLabel({ file: assignment.file });
     const orientation = assignment.reversed ? "reversed" : "upright";
@@ -125,16 +132,21 @@ function renderSlot(positionId) {
     img.classList.toggle("reversed", assignment.reversed);
     face.setAttribute(
       "aria-label",
-      `Card ${index}: ${label}, ${orientation}. Press to change.`
+      `Card ${index}: ${label}, ${orientation}. Press to ${editable ? "change" : "enlarge"}.`
     );
-    clearButton.hidden = false;
-    reverseButton.hidden = !state.allowReversed;
+    clearButton.hidden = !editable;
+    reverseButton.hidden = !editable || !state.allowReversed;
   } else {
     slot.classList.remove("filled");
     img.src = "images/CardBacks.png";
     img.alt = "";
     img.classList.remove("reversed");
-    face.setAttribute("aria-label", `Card ${index}: empty. Choose a card.`);
+    face.setAttribute(
+      "aria-label",
+      editable
+        ? `Card ${index}: empty. Choose a card.`
+        : `Card ${index}: empty. Press to enlarge.`
+    );
     clearButton.hidden = true;
     reverseButton.hidden = true;
   }
@@ -144,6 +156,16 @@ function renderAllSlots() {
   for (const position of currentSpread().positions) {
     renderSlot(position.id);
   }
+}
+
+function setMode(mode) {
+  state.mode = mode;
+  document.body.classList.toggle("mode-preview", mode === "preview");
+  for (const button of modeSwitch.querySelectorAll(".mode-btn")) {
+    button.setAttribute("aria-pressed", String(button.dataset.mode === mode));
+  }
+  renderAllSlots();
+  announce(mode === "preview" ? "Preview mode." : "Edit mode.");
 }
 
 function usedFiles(excludePositionId) {
@@ -220,6 +242,26 @@ function closePicker() {
   }
 }
 
+function openViewer(positionId) {
+  const assignment = state.assignments[positionId];
+  state.triggerEl = document.activeElement;
+
+  viewerImage.src = assignment ? `images/${assignment.file}` : "images/CardBacks.png";
+  viewerImage.alt = assignment ? cardLabel({ file: assignment.file }) : "";
+  viewerImage.classList.toggle("reversed", Boolean(assignment?.reversed));
+
+  cardViewer.hidden = false;
+  viewerClose.focus();
+}
+
+function closeViewer() {
+  cardViewer.hidden = true;
+  if (state.triggerEl) {
+    state.triggerEl.focus();
+    state.triggerEl = null;
+  }
+}
+
 function shuffle(array) {
   const copy = [...array];
   for (let i = copy.length - 1; i > 0; i--) {
@@ -246,6 +288,12 @@ function clearAll() {
   renderAllSlots();
   announce("All positions cleared.");
 }
+
+modeSwitch.addEventListener("click", (event) => {
+  const button = event.target.closest(".mode-btn");
+  if (!button || button.dataset.mode === state.mode) return;
+  setMode(button.dataset.mode);
+});
 
 spreadSelect.addEventListener("change", () => {
   state.spreadId = spreadSelect.value;
@@ -274,6 +322,13 @@ spreadBoard.addEventListener("click", (event) => {
   const positionId = slot.dataset.positionId;
   const action = actionEl.dataset.action;
 
+  if (state.mode === "preview") {
+    if (action === "change") {
+      openViewer(positionId);
+    }
+    return;
+  }
+
   if (action === "change") {
     openPicker(positionId);
   } else if (action === "clear") {
@@ -296,9 +351,14 @@ pickerModal.addEventListener("click", (event) => {
   }
 });
 
+cardViewer.addEventListener("click", closeViewer);
+
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && !pickerModal.hidden) {
+  if (event.key !== "Escape") return;
+  if (!pickerModal.hidden) {
     closePicker();
+  } else if (!cardViewer.hidden) {
+    closeViewer();
   }
 });
 

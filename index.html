@@ -19,19 +19,24 @@
   <main class="page page-wide">
     <h1>Tarot Spread Builder</h1>
 
-    <div class="options">
+    <div class="mode-switch" role="group" aria-label="Mode">
+      <button type="button" class="mode-btn" data-mode="edit" aria-pressed="true">Edit</button>
+      <button type="button" class="mode-btn" data-mode="preview" aria-pressed="false">Preview</button>
+    </div>
+
+    <div class="options edit-only">
       <label class="option">
         <input type="checkbox" id="reversed-toggle" checked />
         Allow reversed cards
       </label>
     </div>
 
-    <div class="spread-row">
+    <div class="spread-row edit-only">
       <label class="spread-select-label" for="spread-select">Spread</label>
       <select id="spread-select"></select>
     </div>
 
-    <div class="board-actions">
+    <div class="board-actions edit-only">
       <button type="button" id="randomize-btn">Randomize</button>
       <button type="button" id="clear-btn">Clear All</button>
     </div>
@@ -47,6 +52,11 @@
       <h2 id="picker-title">Choose a card</h2>
       <div id="picker-grid"></div>
     </div>
+  </div>
+
+  <div class="lightbox card-viewer" id="card-viewer" hidden>
+    <button class="lightbox-close" id="viewer-close" aria-label="Close">&times;</button>
+    <img class="viewer-image" id="viewer-image" src="" alt="" />
   </div>
 
   <script src="cards.js"></script>
