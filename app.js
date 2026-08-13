@@ -248,7 +248,7 @@ function openViewer(positionId) {
 
   viewerImage.src = assignment ? `images/${assignment.file}` : "images/CardBacks.png";
   viewerImage.alt = assignment ? cardLabel({ file: assignment.file }) : "";
-  viewerImage.classList.toggle("reversed", Boolean(assignment?.reversed));
+  viewerImage.classList.remove("reversed");
 
   cardViewer.hidden = false;
   viewerClose.focus();
