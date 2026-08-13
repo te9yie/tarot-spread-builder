@@ -2,15 +2,31 @@
   "name": "Tarot Spread Builder",
   "short_name": "Spread Builder",
   "description": "Pick a tarot spread, place cards in each position, and preview the reading.",
-  "start_url": "./index.html",
-  "scope": "./",
+  "id": "/tarot-spread-builder/",
+  "start_url": "/tarot-spread-builder/",
+  "scope": "/tarot-spread-builder/",
   "display": "standalone",
   "background_color": "#14101c",
   "theme_color": "#14101c",
   "lang": "en",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
