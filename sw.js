@@ -1,4 +1,4 @@
-const CACHE_NAME = "tarot-spread-builder-v2";
+const CACHE_NAME = "tarot-spread-builder-v3";
 
 const APP_SHELL = [
   "./",
@@ -9,6 +9,10 @@ const APP_SHELL = [
   "app.js",
   "manifest.json",
   "images/CardBacks.png",
+  "icons/icon-192.png",
+  "icons/icon-512.png",
+  "icons/icon-maskable-512.png",
+  "icons/apple-touch-icon.png",
 ];
 
 self.addEventListener("install", (event) => {
