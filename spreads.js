@@ -47,6 +47,20 @@ const SPREADS = [
     ],
   },
   {
+    id: "horseshoe",
+    name: "Horseshoe",
+    board: { aspect: "1/1", maxWidth: 600, slotWidth: 14 },
+    positions: [
+      { id: "card-1", x: 7, y: 85, rotation: 0 },
+      { id: "card-2", x: 17, y: 58, rotation: 0 },
+      { id: "card-3", x: 33, y: 32, rotation: 0 },
+      { id: "card-4", x: 50, y: 20, rotation: 0 },
+      { id: "card-5", x: 67, y: 32, rotation: 0 },
+      { id: "card-6", x: 83, y: 58, rotation: 0 },
+      { id: "card-7", x: 93, y: 85, rotation: 0 },
+    ],
+  },
+  {
     id: "celtic-cross",
     name: "Celtic Cross",
     board: { aspect: "7/9", maxWidth: 600, slotWidth: 16 },
